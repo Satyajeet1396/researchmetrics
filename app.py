@@ -29,6 +29,22 @@ def create_downloadable_plot(data, title, xlabel, ylabel):
 st.title("Research Metrics Calculator")
 st.write("Upload a CSV or Excel file containing citations in index 12.")
 
+# Expandable container for app description
+with st.expander("Click here to learn about this app"):
+    st.write("""
+    This app calculates **h-index** and **i10-index** based on the citation data you provide.
+    
+    - **h-index**: The largest number `h` such that at least `h` papers have `h` or more citations.
+    - **i10-index**: The number of papers with at least 10 citations.
+    
+    ### Features:
+    1. Upload your citation data as a CSV or Excel file.
+    2. Visualize the citation distribution through plots.
+    3. Download the generated plots for further use.
+
+    Ensure your file has at least 13 columns, with citations in column index 12.
+    """)
+
 uploaded_file = st.file_uploader("Upload File", type=["csv", "xlsx"])
 
 if uploaded_file:
