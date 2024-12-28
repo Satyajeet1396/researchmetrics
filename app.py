@@ -29,22 +29,43 @@ def create_downloadable_plot(data, title, xlabel, ylabel):
 st.title("Research Metrics Calculator")
 st.write("Upload a CSV or Excel file containing citations in index 12.")
 
-# Expandable container for app description
-with st.expander("Click here to learn about this app"):
-    st.write("""
-    This app calculates **h-index** and **i10-index** based on the citation data you provide.
-    
-    - **h-index**: The largest number `h` such that at least `h` papers have `h` or more citations.
-    - **i10-index**: The number of papers with at least 10 citations.
-    
-    ### Features:
-    1. Upload your citation data as a CSV or Excel file.
-    2. Visualize the citation distribution through plots.
-    3. Download the generated plots for further use.
+# Expandable container with custom styling
+with st.expander("ℹ️ Click here to learn about this app", expanded=False):
+    st.markdown("""
+        <style>
+        .app-info {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f2f6;
+            margin: 10px 0;
+        }
+        .app-info h3 {
+            color: #0066cc;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .app-info ul, .app-info ol {
+            margin-bottom: 20px;
+        }
+        </style>
+        <div class="app-info">
+            <h3>About This App</h3>
+            <p>This app calculates <strong>h-index</strong> and <strong>i10-index</strong> from a list of citations provided in a CSV or Excel file.</p>
+            <ul>
+                <li><strong>h-index</strong>: The largest number <em>h</em> such that at least <em>h</em> papers have <em>h</em> or more citations.</li>
+                <li><strong>i10-index</strong>: The number of papers with at least 10 citations.</li>
+            </ul>
+            <p><strong>Features:</strong></p>
+            <ol>
+                <li>Upload your citation data.</li>
+                <li>Visualize the citation distribution using a bar chart.</li>
+                <li>Download the generated plots for your records.</li>
+            </ol>
+            <p>Make sure your file contains at least 13 columns, with citations located in column index 12.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    Ensure your file has at least 13 columns, with citations in column index 12.
-    """)
-
+# File uploader
 uploaded_file = st.file_uploader("Upload File", type=["csv", "xlsx"])
 
 if uploaded_file:
