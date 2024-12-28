@@ -61,7 +61,7 @@ with st.expander("ℹ️ Click here to learn about this app", expanded=False):
                 <li>Visualize the citation distribution using a bar chart.</li>
                 <li>Download the generated plots for your records.</li>
             </ol>
-            <p>Make sure your file contains at least 13 columns, with citations located in column index 12.</p>
+            <p>Make sure your file contains at least 13 columns, with citations located in <strong>index 12 (column 13)</strong>.</p>
         </div>
         """, unsafe_allow_html=True)
 
