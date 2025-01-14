@@ -29,7 +29,7 @@ def create_downloadable_plot(data, title, xlabel, ylabel):
 
 # Streamlit UI
 st.title("Research Metrics Calculator")
-st.write("Upload a CSV or Excel file containing citations in index 12.")
+st.write("Upload a CSV or Excel file containing a 'Cited by' column.")
 
 # Expandable container with custom styling
 with st.expander("ℹ️ Click here to learn about this app", expanded=False):
@@ -57,13 +57,7 @@ with st.expander("ℹ️ Click here to learn about this app", expanded=False):
                 <li><strong>h-index</strong>: The largest number <em>h</em> such that at least <em>h</em> papers have <em>h</em> or more citations.</li>
                 <li><strong>i10-index</strong>: The number of papers with at least 10 citations.</li>
             </ul>
-            <p><strong>Features:</strong></p>
-            <ol>
-                <li>Upload your citation data.</li>
-                <li>Visualize the citation distribution using a bar chart.</li>
-                <li>Download the generated plots for your records.</li>
-            </ol>
-            <p>Make sure your file contains at least 13 columns, with citations located in <strong>index 12 (column 13)</strong>.</p>
+            <p>Make sure your file contains a column named <strong>'Cited by'</strong>.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -77,8 +71,8 @@ if uploaded_file:
     elif uploaded_file.name.endswith(".xlsx"):
         df = pd.read_excel(uploaded_file)
 
-    if 12 in df.columns or len(df.columns) > 12:
-        citations = df.iloc[:, 12].dropna().astype(int)
+    if "Cited by" in df.columns:
+        citations = df["Cited by"].dropna().astype(int)
         st.write("File loaded successfully!")
         st.write(df.head())
 
@@ -98,7 +92,7 @@ if uploaded_file:
         # Download button for the plots
         st.download_button("Download Citations Plot", buffer_h, "citations_plot.png", "image/png")
     else:
-        st.error("The file does not contain at least 13 columns (index 12). Please check your file.")
+        st.error("The file does not contain a column named 'Cited by'. Please check your file.")
 st.divider()
 st.info("Created by Dr. Satyajeet Patil")
 st.info("For more cool apps like this visit: https://patilsatyajeet.wixsite.com/home/python")
